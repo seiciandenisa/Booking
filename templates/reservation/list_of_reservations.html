@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %} List of reservations {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                {% if all_reservations %}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Product</th>
+                            <th>Reserved by</th>
+                            <th>Check in</th>
+                            <th>Check out</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reservation in all_reservations %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ reservation.product }}</td>
+                                <td>{{ reservation.reserved_by }}</td>
+                                <td>{{ reservation.date_in }}</td>
+                                <td>{{ reservation.date_out }}</td>
+                                <td>
+                                    {% if perms.reservation.change_reservation or perms.reservations.delete_reservation or perms.reservation.view_reservation %}
+                                        <div class="dropdown">
+                                            <a class="btn btn-light dropdown-toggle" href="#" role="button"
+                                               data-bs-toggle="dropdown" aria-expanded="false">More actions
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                {% if perms.reservation.change_reservation %}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'update-reservation' reservation.id %}">Update</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if perms.reservation.delete_reservation %}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'delete-reservation' reservation.id %}">Delete</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if perms.reservation.view_reservation %}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'detail-reservation' reservation.id %}">Details</a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        No actions
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    There are no reservations available!
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

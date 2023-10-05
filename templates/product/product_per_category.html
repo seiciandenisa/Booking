@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} Products {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <br>
+        <div class="row">
+            {% for product in products_category %}
+                <div class="col-md-4">
+                    <div class="card">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top" height="400" alt="...">
+                        {% else %}
+                            <img src="" class="card-img-top" height="400" alt="...">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ product.title }}
+                            </h5>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#desc_{{ product.id }}">
+                                Description
+                            </button>
+                            <div class="modal fade" id="desc_{{ product.id }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+                                                title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ product.description }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="card-text">
+                                    <b>
+                                        {{ product.price }}
+                                    </b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

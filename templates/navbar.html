@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Booking</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home-page' %}">Home</a>
+                </li>
+                {% if user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Category
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'create-category' %}">Create a new category</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'list-of-categories' %}">List of categories</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Product
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'create-product' %}">Create a new product</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'list-of-products' %}">List of products</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        All categories
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for category in get_categories %}
+                            <li><a class="dropdown-item"
+                                   href="{% url 'products-per-category' category.id %}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+
+            {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        My profile
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        <li><a class="dropdown-item" href="{% url 'list-of-reservations' %}">My reservations</a></li>
+{#                        <li><a class="dropdown-item" href="{% url 'history' %}">Historic</a></li>#}
+                    </ul>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{% url 'login' %}"
+                       class="btn btn-outline-success btn-sm">Login</a>
+                </div>
+                <div>
+                    <a href="{% url 'create-user' %}"
+                       class="btn btn-outline-secondary btn-sm">Sign Up</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>

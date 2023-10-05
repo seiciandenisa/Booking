@@ -1,0 +1,23 @@
+# media upload - done
+# static files - create/ trebuie completate - done
+# validari formular category - done
+# validari formular product - done
+# populare tabele category/product -done
+# daca nu sunt categorii in tabela, in interfata sa iti apara no category - done
+# daca nu sunt produse in tabela, in interfata sa iti apara no products - done
+# create superuser (python manage.py create superuser) - done
+# descrierea produselor sa fie intr-un modal cu un pop-up sau scroll - done
+# filtrari pe produse - done
+# redirect pt delete - done
+
+# context processor - datele din tabela category sa fie accesibila pe orice pagina as fi
+# in booking - fisier nou context_processors.py - done
+# in fisierul settings.py din aplicatia booking am adaugat in templates codul pt a apela fiecare categorie - done
+# in views.py cream functia prin care preluam informatiile - done
+# in urls.py adaugam calea - done
+# cream pagina html 'products_per_category' - done
+# in navbar adaugam un nou dropdown button si url spre pagina html de mai sus - done
+
+# in details_product la more images vreau sa apara mai multe imagini cu produsul
+# APLICATIE NOUA  reservation - done
+# adaug buton de rezervare in lista cu produse - done

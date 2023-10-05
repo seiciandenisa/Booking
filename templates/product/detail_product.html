@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Details of {{ product }} {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        More details
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product }}</h5>
+                        <p class="card-text"><b>Category: {{ product.category }}</b>, <i>Title: {{ product.title }}</i>
+                        </p>
+                    </div>
+                    <div class="card-footer text-body-secondary">
+                        <b>Description: </b> {{ product.description }} <br>
+                        <b>More images:</b> {{ product.image }}<br>
+                        <b>Price/day: </b> {{ product.price }}<br>
+                        <b>Availability during the check-in/check-out days chosen:</b> {{ product.is_available }}<br>
+                        <b>Created at:</b> {{ product.created_at|date:'d-m-Y H:i:s' }}<br>
+                        <b>Last update: </b> {{ product.updated_at|date:'d-m-y H:i:s' }}<br>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'list-of-products' %}" class="btn btn-outline-dark">Return</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

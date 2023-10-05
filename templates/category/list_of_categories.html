@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} List of categories {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                {% if all_categories %}
+                    <table class="table table-bordered border-warning-subtle">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Created at</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for category in all_categories %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ category.name }}</td>
+                                <td>{{ category.created_at }}</td>
+                                <td>
+                                    {% if perms.category.change_category or perms.category.delete_category or perms.category.view_category %}
+                                        <div class="dropdown">
+                                            <a class="btn btn-light dropdown-toggle" href="#" role="button"
+                                               data-bs-toggle="dropdown"
+                                               aria-expanded="false">
+                                                More actions
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                {% if perms.category.change_category %}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'update-category' category.id %}">Update</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if perms.category.delete_category %}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'delete-category' category.id %}">Delete</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if perms.category.view_category %}
+                                                    <li><a class="dropdown-item"
+                                                           href="{% url 'detail-category' category.id %}">Detail</a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        No actions
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    There are no categories available!
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

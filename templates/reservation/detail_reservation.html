@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Details of {{ reservation }} {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Details of reservation
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ reservation }}</h5>
+                        <p class="card-text"><b>Reservation:</b>{{ reservation.product }}</p>
+                    </div>
+                    <div class="card-footer text-body-secondary">
+                        <b>Reserved by:</b> {{ reservation.reserved_by }} <br>
+                        <b>Date in:</b> {{ reservation.date_in }} <br>
+                        <b>Date out:</b> {{ reservation.date_out }} <br>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'list-of-reservations' %}" class="btn btn-outline-dark">Return</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
